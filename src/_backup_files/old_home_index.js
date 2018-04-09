@@ -10,12 +10,8 @@ import {
 } from "../../modules/counter";
 import {
     Grid,
-    Row,
     Col,
-    Jumbotron,
-    Button,
 } from "react-bootstrap";
-import Msg from "../../config/messages";
 
 class Home extends React.Component {
     constructor(props) {
@@ -25,18 +21,25 @@ class Home extends React.Component {
     render() {
         return (
             <Grid>
-                <Row className="show-grid">
-                    <Col xs={12} md={8} mdPush={2}>
-                        {!this.props.authenticated && (
-                            <Jumbotron>
-                                <p>{Msg.pleaseAuthorize}</p>
-                                <p>
-                                    <Button bsStyle="primary">Learn more</Button>
-                                </p>
-                            </Jumbotron>
-                        )}
-                    </Col>
-                </Row>
+                <div>
+                    <h1>Home</h1>
+                    <p>Count: {this.props.count}</p>
+
+                    <p>
+                        <button onClick={this.props.increment} disabled={this.props.isIncrementing}>Increment</button>
+                        <button onClick={this.props.incrementAsync} disabled={this.props.isIncrementing}>Increment Async</button>
+                    </p>
+
+                    <p>
+                        <button onClick={this.props.decrement} disabled={this.props.isDecrementing}>Decrement</button>
+                        <button onClick={this.props.decrementAsync} disabled={this.props.isDecrementing}>Decrement Async</button>
+                    </p>
+
+
+                    <p>
+                        <button onClick={() => this.props.changePage()}>Go to About page via Redux</button>
+                    </p>
+                </div>
             </Grid>
         )
     }
