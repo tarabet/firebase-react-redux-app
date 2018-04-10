@@ -31,7 +31,7 @@ class Home extends React.Component {
                             <Jumbotron>
                                 <p>{Msg.pleaseAuthorize}</p>
                                 <p>
-                                    <Button bsStyle="primary">Learn more</Button>
+                                    <Button bsStyle="primary" onClick={this.props.changePage}>Learn more</Button>
                                 </p>
                             </Jumbotron>
                         )}

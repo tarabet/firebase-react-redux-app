@@ -4,6 +4,7 @@ export const HIDE_REGISTER_FORM = "auth/HIDE_REGISTER_FORM";
 
 const initialState = {
     authenticated: false,
+    currentUser: null,
     showRegisterForm: false,
 };
 
@@ -12,7 +13,8 @@ export default (state = initialState, action) => {
         case SET_AUTH:
             return {
                 ...state,
-                authenticated: action.payload,
+                authenticated: action.payload.authenticated,
+                currentUser: action.payload.currentUser,
             };
         case SHOW_REGISTER_FORM:
             return {
