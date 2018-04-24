@@ -98,14 +98,17 @@ class NavbarUserPanel extends React.Component {
 
     userPanel() {
         return (
-            <Navbar.Form pullRight>
-                <Button
-                    type="button"
-                    onClick={this.logoutHandler}
-                >
-                    Logout
-                </Button>
-            </Navbar.Form>
+            <React.Fragment>
+                <Navbar.Form pullRight>
+                    <Button
+                        type="button"
+                        onClick={this.logoutHandler}
+                    >
+                        Logout
+                    </Button>
+                </Navbar.Form>
+                <Navbar.Text pullRight>Signed in as: {this.props.currentUser}</Navbar.Text>
+            </React.Fragment>
         );
     }
 
@@ -116,6 +119,7 @@ class NavbarUserPanel extends React.Component {
 
 const mapStateToProps = (state) => ({
     authenticated: state.auth.authenticated,
+    currentUser: state.auth.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({

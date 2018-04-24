@@ -15,7 +15,8 @@ import {
     Jumbotron,
     Button,
 } from "react-bootstrap";
-import Msg from "../../config/messages";
+import HomeUnauthorised from "../../components/home/unauthorised";
+import HomeAuthorised from "../../components/home/authorised";
 
 class Home extends React.Component {
     constructor(props) {
@@ -27,14 +28,10 @@ class Home extends React.Component {
             <Grid>
                 <Row className="show-grid">
                     <Col xs={12} md={8} mdPush={2}>
-                        {!this.props.authenticated && (
-                            <Jumbotron>
-                                <p>{Msg.pleaseAuthorize}</p>
-                                <p>
-                                    <Button bsStyle="primary" onClick={this.props.changePage}>Learn more</Button>
-                                </p>
-                            </Jumbotron>
-                        )}
+                        {this.props.authenticated
+                            ? <HomeAuthorised userName={this.props.currentUser} />
+                            : <HomeUnauthorised />
+                        }
                     </Col>
                 </Row>
             </Grid>
@@ -52,6 +49,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 const mapStateToProps = state => ({
     authenticated: state.auth.authenticated,
+    currentUser: state.auth.currentUser,
     count: state.counter.count,
     isIncrementing: state.counter.isIncrementing,
     isDecrementing: state.counter.isDecrementing,
