@@ -3,3 +3,13 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.pull-right {
+    float: right;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

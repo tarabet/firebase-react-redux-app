@@ -9,5 +9,11 @@ export default {
     },
     todo: {
         addNewItemBtn: "Add",
-    }
+        addNewItemHeader: "Add new ToDo item",
+        ItemText: "Task",
+        AddItemInputPlaceholder: "Input task here",
+        ItemStatus: "Status",
+        AddItemButtonText: "Add item",
+    },
+    appLoading: "Loading..."
 };

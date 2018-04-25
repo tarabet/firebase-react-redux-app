@@ -1,4 +1,4 @@
-export const SET_ITEMS = "auth/SET_ITEMS";
+export const SET_ITEMS = "items/SET_ITEMS";
 
 const initialState = {
     toDoItems: null,
