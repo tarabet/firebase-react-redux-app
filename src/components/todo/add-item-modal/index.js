@@ -10,6 +10,10 @@ import {
     HelpBlock,
 } from "react-bootstrap";
 import Msg from "../../../config/messages";
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default class AddToDoItemModal extends React.Component {
     constructor(props) {
@@ -17,9 +21,11 @@ export default class AddToDoItemModal extends React.Component {
 
         this.state = {
             text: "",
+            dueDate: moment(),
         };
 
         this.textChangeHandler = this.textChangeHandler.bind(this);
+        this.dueDateHandler = this.dueDateHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
     }
 
@@ -40,6 +46,13 @@ export default class AddToDoItemModal extends React.Component {
         return null;
     }
 
+    dueDateHandler(date) {
+        this.setState({
+            ...this.state,
+            dueDate: date,
+        });
+    }
+
     submitHandler(e) {
         e.preventDefault();
         this.props.addItemHandler(this.state);
@@ -55,6 +68,8 @@ export default class AddToDoItemModal extends React.Component {
     }
 
     render() {
+        console.log("State:", this.state);
+
         return (
             <Modal show={this.props.showModal} onHide={this.props.modalToggleHandler}>
                 <Modal.Header closeButton>
@@ -77,6 +92,19 @@ export default class AddToDoItemModal extends React.Component {
                                     value={this.state.name}
                                 />
                                 <FormControl.Feedback />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup>
+                            <Col componentClass={ControlLabel} sm={2}>
+                                {Msg.todo.dueDateText}
+                            </Col>
+                            <Col sm={10}>
+                                <DatePicker
+                                    selected={this.state.dueDate}
+                                    onChange={this.dueDateHandler}
+                                    placeholderText={Msg.todo.DueDateInputPlaceholder}
+                                    className="form-control"
+                                />
                             </Col>
                         </FormGroup>
                         <FormGroup>

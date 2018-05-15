@@ -48,6 +48,7 @@ class ToDoWrapper extends React.Component {
         this.addItemModalToggle = this.addItemModalToggle.bind(this);
         this.addItemHandler = this.addItemHandler.bind(this);
         this.completeItemHandler = this.completeItemHandler.bind(this);
+        this.deleteItemHandler = this.deleteItemHandler.bind(this);
         this.processToDoItems = this.processToDoItems.bind(this);
     }
 
@@ -76,6 +77,20 @@ class ToDoWrapper extends React.Component {
                 ...this.props.toDoItems[id],
                 completed: true,
             }
+        })
+        .then(() => {
+            this.props.loading(false);
+        });
+
+        this.props.loading(true);
+    }
+
+    deleteItemHandler(id) {
+        this.$toDoItemsRef.update({
+            [id]: null,
+        })
+        .then(() => {
+            this.props.loading(false);
         });
 
         this.props.loading(true);
@@ -115,7 +130,7 @@ class ToDoWrapper extends React.Component {
                             key={i}
                             itemId={i}
                             item={items[i].item}
-                            action={this.completeItemHandler}
+                            action={items[i].completed ? this.deleteItemHandler : this.completeItemHandler}
                             mark={mark}
                         />
                     )
