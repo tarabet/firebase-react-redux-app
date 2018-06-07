@@ -58,11 +58,12 @@ class ToDoWrapper extends React.Component {
         })
     }
 
-    addItemHandler(itemObj) {
+    addItemHandler({text, dueDate}) {
         this.props.loading(true);
 
         this.$toDoItemsRef.push({
-            item: itemObj.text,
+            item: text,
+            dueDate: dueDate.format(),
             completed: false,
         });
 
@@ -125,12 +126,15 @@ class ToDoWrapper extends React.Component {
 
         for (let i in items) {
                 if (items.hasOwnProperty(i) && checkToDoFilters(this.state.listItemsMode, items[i].completed)) {
+                    const toDoElem = items[i];
+
                     itemsList.push(
                         <ToDoItem
                             key={i}
                             itemId={i}
-                            item={items[i].item}
-                            action={items[i].completed ? this.deleteItemHandler : this.completeItemHandler}
+                            item={toDoElem.item}
+                            dueDate={toDoElem.dueDate}
+                            action={toDoElem.completed ? this.deleteItemHandler : this.completeItemHandler}
                             mark={mark}
                         />
                     )
